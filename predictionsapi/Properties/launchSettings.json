@@ -15,8 +15,7 @@
       "launchUrl": "predictionsapi/v1/swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "api_key": "test"
+      }
     },
     "predictionsapi": {
       "commandName": "Project",

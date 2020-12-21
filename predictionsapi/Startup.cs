@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using predictionsapi.Interfaces;
+using predictionsapi.Models;
 
 namespace predictionsapi
 {
@@ -29,6 +30,10 @@ namespace predictionsapi
         {
             // services.AddScoped<IPredictionService, PredictionService>();
             services.AddHttpClient<IPredictionService, RailPredictionService>();
+            services.Configure<ApiSettings>(options =>
+            {
+                options.APIKeyDC = Configuration["api_key"] ?? Environment.GetEnvironmentVariable("api_key");
+            });
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

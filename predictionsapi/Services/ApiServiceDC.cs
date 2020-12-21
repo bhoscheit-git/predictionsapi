@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using predictionsapi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +13,10 @@ namespace predictionsapi.Services
     {
         private readonly ILogger<T> _logger;
         private readonly HttpClient _client;
-        protected ApiServiceDC(ILogger<T> logger, HttpClient client)
+        private readonly string _key;
+        protected ApiServiceDC(IOptions<ApiSettings> settings, ILogger<T> logger, HttpClient client)
         {
+            _key = settings.Value.APIKeyDC;
             _logger = logger;
             _client = client;
         }
@@ -21,7 +25,7 @@ namespace predictionsapi.Services
         {
             try
             {
-                request.Headers.Add("api_key", Environment.GetEnvironmentVariable("api_key"));
+                request.Headers.Add("api_key", _key);
                 return await _client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
             }
             catch (Exception ex)

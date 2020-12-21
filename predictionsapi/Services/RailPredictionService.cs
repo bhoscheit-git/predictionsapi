@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using predictionsapi.Interfaces;
 using predictionsapi.Models;
 using predictionsapi.Services;
@@ -15,7 +16,7 @@ namespace predictionsapi
 {
     public class RailPredictionService : ApiServiceDC<RailPredictionService>, IPredictionService
     {
-        public RailPredictionService(ILogger<RailPredictionService> logger, HttpClient client) : base(logger, client)
+        public RailPredictionService(IOptions<ApiSettings> settings, ILogger<RailPredictionService> logger, HttpClient client) : base(settings, logger, client)
         {
         }
 
