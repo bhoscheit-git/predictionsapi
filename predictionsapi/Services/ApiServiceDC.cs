@@ -21,7 +21,7 @@ namespace predictionsapi.Services
         {
             try
             {
-                
+                request.Headers.Add("api_key", Environment.GetEnvironmentVariable("api_key"));
                 return await _client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
             }
             catch (Exception ex)
